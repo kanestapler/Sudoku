@@ -1,3 +1,4 @@
+import { BoardService } from './../board.service';
 import { Difficulty } from 'app/difficulty.enum';
 import { Board } from './../board';
 import { Component, OnInit } from '@angular/core';
@@ -12,8 +13,8 @@ export class BoardComponent implements OnInit {
 
     board: Board;
 
-    constructor() {
-        this.board = new Board(Difficulty.easy);
+    constructor(private BoardService: BoardService) {
+        this.board = new Board(Difficulty.easy, BoardService);
      }
 
     ngOnInit() {

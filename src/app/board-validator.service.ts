@@ -29,7 +29,8 @@ export class BoardValidatorService {
     }
 
     private CheckVertical(board: number[][], column: number): boolean {
-        let values: number[];
+        console.log("Check Vert");
+        let values: number[] = [];
         for (let i = 0; i < 9; i++) {
             if (values.includes(board[i][column])) {
                 return false;
@@ -39,8 +40,10 @@ export class BoardValidatorService {
         return true;
     }
 
+
     private CheckHorizontal(board: number[][], row: number): boolean {
-        let values: number[];
+        console.log("Check Horiz");
+        let values: number[] = [];
         for (let j = 0; j < 9; j++) {
             if (values.includes(board[row][j])) {
                 return false;
@@ -51,9 +54,10 @@ export class BoardValidatorService {
     }
 
     private CheckSquare(board: number[][], row: number, column: number): boolean {
+        console.log("Check Square");
         row = row - (row % 3);// Should always give either 0, 3, 6
         column = column - (column % 3);
-        let values: number[];
+        let values: number[] = [];
         for (let i = row; i < (row + 3); i++) {
             for (let j = column; j < (column + 3); j++) {
                 if (values.includes(board[i][j])) {
