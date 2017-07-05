@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class BoardValidatorService {
 
-    IsMoveValid(board: number[][], row: number, column: number): boolean {
+    DoesMoveCompleteBoard(board: number[][], row: number, column: number): boolean {
         if (this.CheckHorizontal(board, row) && this.CheckVertical(board, column) && this.CheckSquare(board, row, column)) {
             return true;
         }
         return false;
     }
 
-    IsBoardValid(board: number[][]): boolean {
+    IsBoardComplete(board: number[][]): boolean {
         //Check all verticals and horizontals
         for (let i = 0; i < 9; i++) {
             if (!this.CheckHorizontal(board, i) || !this.CheckVertical(board, i)) {
@@ -32,7 +32,7 @@ export class BoardValidatorService {
         console.log("Check Vert");
         let values: number[] = [];
         for (let i = 0; i < 9; i++) {
-            if (values.includes(board[i][column])) {
+            if (values.includes(board[i][column]) || board[i][column] === null) {
                 return false;
             }
             values.push(board[i][column]);
@@ -45,7 +45,9 @@ export class BoardValidatorService {
         console.log("Check Horiz");
         let values: number[] = [];
         for (let j = 0; j < 9; j++) {
-            if (values.includes(board[row][j])) {
+            console.log(values);
+            console.log(board[row][j]);
+            if (values.includes(board[row][j]) || board[row][j] === null) {
                 return false;
             }
             values.push(board[row][j]);
@@ -60,7 +62,7 @@ export class BoardValidatorService {
         let values: number[] = [];
         for (let i = row; i < (row + 3); i++) {
             for (let j = column; j < (column + 3); j++) {
-                if (values.includes(board[i][j])) {
+                if (values.includes(board[i][j]) || board[i][j] === null) {
                     return false;
                 } else {
                     values.push(board[i][j]);
