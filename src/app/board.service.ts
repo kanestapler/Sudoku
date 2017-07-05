@@ -49,22 +49,13 @@ export class BoardService {
 
     private CreateFullBoardRecursively(board: number[][], row: number, column: number): number[][] {
         let guesses: number[] = [];
-        if (row === 8 && column === 8) {
-            return board;
+        let guess: number = this.RandomInt(1,9);
+        board[row][column] = guess;
+        if (this.BoardValidatorService.IsMoveValid(board, row, column)) {
+            
         }
-        do {
-            let guess: number = 0;
-            do {
-                guesses.push(guess);
-                guess = this.RandomInt(1,9);
-            } while (guesses.includes(guess));
-            board[row][column] = guess;
-        } while (!this.BoardValidatorService.DoesMoveCompleteBoard(board, row, column));
-        if (row === 8) {
-            row = 0;
-            column++;
-        }
-        return this.CreateFullBoardRecursively(board, row, column);
+        return board;
+
     }
 
     private RandomInt(min, max) {

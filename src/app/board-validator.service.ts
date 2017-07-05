@@ -28,6 +28,10 @@ export class BoardValidatorService {
         return true;
     }
 
+    IsMoveValid(board: number[][], row: number, column: number): boolean {
+        return true;
+    }
+
     private CheckVertical(board: number[][], column: number): boolean {
         console.log("Check Vert");
         let values: number[] = [];

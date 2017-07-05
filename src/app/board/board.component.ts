@@ -21,8 +21,8 @@ export class BoardComponent implements OnInit {
         this.completed = false;
      }
 
-     CheckIfBoardIsComplete(row: number, column: number) {
-         if (this.BoardValidatorService.DoesMoveCompleteBoard(this.board.board, row, column)) {
+     CheckIfBoardIsComplete() {
+         if (this.BoardValidatorService.IsBoardComplete(this.board.board)) {
              this.completed = true;
          } else {
              this.completed = false;
