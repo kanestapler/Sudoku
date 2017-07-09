@@ -1,4 +1,3 @@
-import { Difficulty } from 'app/difficulty.enum';
 import { BoardValidatorService } from './board-validator.service';
 import { Injectable } from '@angular/core';
 
@@ -8,8 +7,7 @@ export class BoardService {
 
     }
 
-    CreateBoard(difficulty: Difficulty): number[][] {
-        console.log("Creating Board");
+    CreateBoard(difficulty: string): number[][] {
         let testBoard: number[][] = [
             [3, 9, 1, 2, 8, 6, 5, 7, 4],
             [4, 8, 7, 3, 5, 9, 1, 2, 6],
@@ -21,13 +19,8 @@ export class BoardService {
             [5, 3, 8, 1, 4, 2, 9, 6, 7],
             [7, 2, 6, 8, 9, 5, 3, 4, 1]
         ]
-        testBoard = this.RemoveRandomValuesFromBoard(testBoard, difficulty);
-        let randomBoard: number[][] = this.CreateRandomBoard();
-        console.log(randomBoard);
+        let randomBoard: number[][] = this.RemoveRandomValuesFromBoard(this.CreateRandomBoard(), difficulty);
         return randomBoard;
-        // let temp: number[][] = [[]];
-        // let finishedBoard: number[][] = this.CreateFullBoardRecursively(temp, 0,0);
-        // return finishedBoard;
     }
 
     private CreateRandomBoard(): number[][] {
@@ -35,14 +28,14 @@ export class BoardService {
         return this.CreateFullBoardRecursively(outputBoard, 0,0);
     }
 
-    private RemoveRandomValuesFromBoard(board: number[][], difficulty: Difficulty) {
+    private RemoveRandomValuesFromBoard(board: number[][], difficulty: string) {
         let numbersToRemove: number;
-        if (difficulty === Difficulty.easy) {
+        if (difficulty === 'Easy') {
             numbersToRemove = 40;
-        } else if (difficulty === Difficulty.medium) {
-            numbersToRemove = 50;
-        } else if (difficulty === Difficulty.hard) {
-            numbersToRemove = 60;
+        } else if (difficulty === 'Medium') {
+            numbersToRemove = 55;
+        } else if (difficulty === 'Hard') {
+            numbersToRemove = 70;
         }
         while (numbersToRemove > 0) {
             let column = this.RandomInt(0, 8);
@@ -73,13 +66,8 @@ export class BoardService {
         for (let i=0; i < 9; i++) {
             let guessIndex: number = this.RandomInt(0, (guesses.length - 1));
             guess = guesses[guessIndex];
-            console.log("My Row: ", myRow);
-            console.log("My Column: ", myColumn);
-            console.log("Next Row: ", nextRow);
-            console.log("Next Column: ", nextColumn);
-            console.log(this.ConsoleLogBoard(board));
             board[myRow][myColumn] = guess;
-            guesses.splice(guesses.indexOf(guess));
+            guesses.splice(guessIndex, 1);
             if (this.BoardValidatorService.IsMoveValid(board, myRow, myColumn)) {
                 board = this.CreateFullBoardRecursively(board, nextRow, nextColumn);
                 if (nextRow===9 || board[nextRow][nextColumn] != null) {

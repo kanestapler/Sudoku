@@ -1,3 +1,6 @@
+<select id="difficulty" [(ngModel)]="difficultyString">
+  <option *ngFor="let key of keys">{{key}}</option>
+</select>
 <tbody class="board">
   <tr *ngFor="let x of [0,1,2,3,4,5,6,7,8]">
     <td *ngFor="let y of [0,1,2,3,4,5,6,7,8]">
@@ -5,6 +8,8 @@
     </td>
   </tr>
 </tbody>
+
+<button id="rebuild" (click)="rebuild()">Rebuild</button>
 
 
 <p class="victory-text" [ngClass]="{'completed' : completed}">

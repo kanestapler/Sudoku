@@ -29,7 +29,6 @@ export class BoardValidatorService {
     }
 
     IsMoveValid(board: number[][], row: number, column: number): boolean {
-        console.log("Is Move Valid");
         if (this.CheckIfVerticalValid(board, row, column) && this.CheckIfHorizontalValid(board, row, column) && this.CheckIfSquareValid(board, row, column)) {
             return true;
         } else {
@@ -38,7 +37,6 @@ export class BoardValidatorService {
     }
 
     private CheckIfVerticalValid(board: number[][], row: number, column: number): boolean {
-        console.log("Check Vert");
         let values: number[] = [];
         for (let i = 0; i < 9; i++) {
             if (values.includes(board[i][column])) {
@@ -52,7 +50,6 @@ export class BoardValidatorService {
     }
 
     private CheckIfHorizontalValid(board: number[][], row: number, column: number): boolean {
-        console.log("Check Horiz");
         let values: number[] = [];
         for (let j = 0; j < 9; j++) {
             if (values.includes(board[row][j])) {
@@ -66,7 +63,6 @@ export class BoardValidatorService {
     }
 
     private CheckIfSquareValid(board: number[][], row: number, column: number): boolean {
-        console.log("Check Square");
         row = row - (row % 3);// Should always give either 0, 3, 6
         column = column - (column % 3);
         let values: number[] = [];
@@ -84,7 +80,6 @@ export class BoardValidatorService {
     }
 
     private CheckVerticalForWin(board: number[][], column: number): boolean {
-        console.log("Check Vert");
         let values: number[] = [];
         for (let i = 0; i < 9; i++) {
             if (values.includes(board[i][column]) || board[i][column] === null) {
@@ -97,11 +92,8 @@ export class BoardValidatorService {
 
 
     private CheckHorizontalForWin(board: number[][], row: number): boolean {
-        console.log("Check Horiz");
         let values: number[] = [];
         for (let j = 0; j < 9; j++) {
-            console.log(values);
-            console.log(board[row][j]);
             if (values.includes(board[row][j]) || board[row][j] === null) {
                 return false;
             }
@@ -111,7 +103,6 @@ export class BoardValidatorService {
     }
 
     private CheckSquareForWin(board: number[][], row: number, column: number): boolean {
-        console.log("Check Square");
         row = row - (row % 3);// Should always give either 0, 3, 6
         column = column - (column % 3);
         let values: number[] = [];

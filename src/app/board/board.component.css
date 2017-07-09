@@ -20,6 +20,20 @@
     display: block;
 }
 
+#difficulty {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2em;
+    display: block;
+}
+
+#rebuild {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    display: block;
+}
+
 input {
     border: thin solid grey;
 }

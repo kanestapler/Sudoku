@@ -1,6 +1,5 @@
 import { BoardValidatorService } from './../board-validator.service';
 import { BoardService } from './../board.service';
-import { Difficulty } from 'app/difficulty.enum';
 import { Board } from './../board';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,11 +12,14 @@ import { Component, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
 
     completed: boolean;
-
+    keys: string[];
+    difficultyString: string;
     board: Board;
 
     constructor(private BoardService: BoardService, private BoardValidatorService: BoardValidatorService) {
-        this.board = new Board(Difficulty.easy, BoardService);
+        this.keys = ['Easy', 'Medium', 'Hard'];
+        this.difficultyString = 'Easy';
+        this.board = new Board('Easy', BoardService);
         this.completed = false;
      }
 
@@ -30,6 +32,10 @@ export class BoardComponent implements OnInit {
      }
 
     ngOnInit() {
+    }
+
+    rebuild() {
+        this.board = new Board(this.difficultyString, this.BoardService);
     }
 
 }
